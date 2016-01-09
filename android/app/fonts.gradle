@@ -2,7 +2,7 @@
  * Task to copy icon font files
  */
 def iconFontsDir = '../../node_modules/react-native-vector-icons/Fonts';
-def iconFontName = 'MaterialIcons.ttf';
+def iconFontName = 'Ionicons.ttf';
 
 task copyDebugIconFonts(type: Copy) {
     from("$iconFontsDir/$iconFontName")
