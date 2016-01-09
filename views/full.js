@@ -1,5 +1,4 @@
 import React from "react-native";
-import Clipboard from "../modules/clipboard";
 import Color from "pigment/full";
 import Constants from "../constants.json";
 
@@ -7,7 +6,8 @@ const {
     StyleSheet,
     Text,
     View,
-    TouchableHighlight
+    TouchableHighlight,
+    Clipboard
 } = React;
 
 const styles = StyleSheet.create({
@@ -54,7 +54,7 @@ export default class Full extends React.Component {
     }
 
     copyToClipboard(text) {
-        Clipboard.set(text);
+        Clipboard.setString(text);
 
         this.setState({ copied: true });
 

@@ -7,6 +7,7 @@
     "build-android": "cd android && ./gradlew assembleRelease --stacktrace; cd .."
   },
   "dependencies": {
+    "pigment": "0.0.5",
     "react-native": "^0.18.0-rc"
   }
 }
