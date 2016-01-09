@@ -6,12 +6,16 @@ import NavigationBarRouteMapper from './NavigationBarRouteMapper';
 
 const {
     StyleSheet,
-    Navigator
+    Navigator,
+    Platform,
+    PixelRatio
 } = React;
 
 const styles = StyleSheet.create({
     navbar: {
         backgroundColor: Colors.primary,
+        borderBottomWidth: Platform.OS === 'ios' ? 1 / PixelRatio.get() : 0,
+        borderBottomColor: 'rgba(0, 0, 0, .16)',
         elevation: 4
     }
 });

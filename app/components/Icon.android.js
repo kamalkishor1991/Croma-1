@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react-native';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export default class Icon extends React.Component {
     _root: Object;
@@ -12,10 +12,11 @@ export default class Icon extends React.Component {
 
     render() {
         return (
-            <MaterialIcons
+            <Ionicons
                 ref={c => this._root = c}
                 allowFontScaling={false}
                 {...this.props}
+                name={'android-' + this.props.name}
             />
         );
     }

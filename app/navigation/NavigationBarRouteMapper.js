@@ -3,8 +3,7 @@
 
 import React from 'react-native';
 import Colors from '../constants/Colors';
-import Icon from '../components/Icon';
-import TouchFeedback from '../components/TouchFeedback';
+import AppbarButton from '../components/AppbarButton';
 
 const {
     StyleSheet,
@@ -23,11 +22,6 @@ const styles = StyleSheet.create({
         lineHeight: 27,
         fontSize: 18,
         fontWeight: 'bold',
-        color: Colors.white
-    },
-
-    icon: {
-        fontSize: 24,
         color: Colors.white
     },
 
@@ -52,17 +46,7 @@ const NavigationBarRouteMapper = {
         }
 
         if (route.index !== 0) {
-            return (
-                <TouchFeedback
-                    onPress={goBack}
-                    pressColor='rgba(0, 0, 0, .16)'
-                    borderless
-                >
-                    <View style={styles.button}>
-                        <Icon style={styles.icon} name='arrow-back' />
-                    </View>
-                </TouchFeedback>
-            );
+            return <AppbarButton onPress={goBack} name='arrow-back' />;
         }
     },
 

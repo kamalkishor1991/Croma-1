@@ -10,7 +10,9 @@ const {
     View,
     TouchableHighlight,
     Clipboard,
-    ToastAndroid
+    ToastAndroid,
+    Alert,
+    Platform
 } = React;
 
 const styles = StyleSheet.create({
@@ -20,14 +22,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    headerContainer: {
+        borderRadius: 30
+    },
     header: {
         fontSize: 36,
         textAlign: 'center',
-        margin: 8,
-        opacity: 0.7
+        marginVertical: 8,
+        marginHorizontal: 24
     },
     infoContainer: {
-        borderRadius: 24
+        borderRadius: 18
     },
     info: {
         flexDirection: 'row',
@@ -44,7 +49,7 @@ const styles = StyleSheet.create({
     },
     hint: {
         fontSize: 12,
-        marginTop: 16,
+        marginTop: 24,
         opacity: 0.5
     }
 });
@@ -65,7 +70,13 @@ const _getItems = (c) => {
 const _copyToClipboard = (text) => {
     Clipboard.setString(text);
 
-    ToastAndroid.show(`Copied to Clipboard: ${text}`, ToastAndroid.SHORT);
+    const successText = `Copied to Clipboard: ${text}`;
+
+    if (Platform.OS === 'android') {
+        ToastAndroid.show(successText, ToastAndroid.SHORT);
+    } else {
+        Alert.alert(successText);
+    }
 };
 
 
@@ -85,13 +96,21 @@ const ColorSheet = (props: Props) => {
 
     return (
         <View style={[ styles.container, { backgroundColor: hex } ]}>
-            <Text style={[ styles.header, { color } ]}>{hex.toUpperCase()}</Text>
+            <TouchableHighlight
+                style={styles.headerContainer}
+                underlayColor='rgba(0, 0, 0, .16)'
+                onPress={() => _copyToClipboard(hex)}
+            >
+                <Text style={[ styles.header, { color } ]}>
+                    {hex.toUpperCase()}
+                </Text>
+            </TouchableHighlight>
 
             {_getItems(c).map(item =>
                 <TouchableHighlight
                     key={item.value}
                     style={styles.infoContainer}
-                    underlayColor={'rgba(0, 0, 0, .1)'}
+                    underlayColor='rgba(0, 0, 0, .16)'
                     onPress={() => _copyToClipboard(item.value)}
                 >
                     <View style={styles.info}>

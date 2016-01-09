@@ -56,6 +56,7 @@ const PaletteCard = (props: Props) => (
                 </View>
                 <View style={styles.bottom}>
                     <Text style={styles.label}>{props.palette.name}</Text>
+                    <CardAction name='share' />
                     <CardAction name='create' />
                     <CardAction name='delete' />
                 </View>

@@ -16,8 +16,7 @@ const styles = StyleSheet.create({
         margin: 16,
         alignItems: 'center',
         justifyContent: 'center',
-        opacity: 0.5,
-        color: '#000'
+        color: 'rgba(0, 0, 0, .5)' // opacity is not correct on iOS
     }
 });
 
