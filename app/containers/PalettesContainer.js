@@ -1,37 +1,24 @@
 /* @flow */
 
-import React from 'react-native';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Palettes from '../components/Palettes';
-import * as PalettesActions from '../actions/PalettesActions';
+import { add, edit, remove } from '../actions/PalettesActions';
 
-type Props = {
-    navigator: Object;
-    palettes: Object;
-    dispatch: Function;
-}
-
-const PalettesContainer = (props: Props) => {
-    const {
-        navigator,
-        palettes,
-        dispatch
-    } = props;
-
-    return (
-        <Palettes
-            navigator={navigator}
-            palettes={palettes}
-            {...bindActionCreators(PalettesActions, dispatch)}
-        />
-    );
-};
-
-function select(state) {
+function mapStateToProps(state) {
     return {
         palettes: state.palettes
     };
 }
 
-export default connect(select)(PalettesContainer);
+function mapDispatchToProps(dispatch) {
+    return {
+        add: palette => dispatch(add(palette)),
+        edit: palette => dispatch(edit(palette)),
+        remove: palette => dispatch(remove(palette))
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Palettes);

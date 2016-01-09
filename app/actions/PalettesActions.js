@@ -1,6 +1,6 @@
 /* @flow */
 
-import { ADD_PALETTE, REMOVE_PALETTE } from '../constants/ActionTypes';
+import { ADD_PALETTE, EDIT_PALETTE, REMOVE_PALETTE } from '../constants/ActionTypes';
 
 type Action = {
     type: string
@@ -9,6 +9,13 @@ type Action = {
 export function add(palette: Object): Action {
     return {
         type: ADD_PALETTE,
+        palette
+    };
+}
+
+export function edit(palette: Object): Action {
+    return {
+        type: EDIT_PALETTE,
         palette
     };
 }

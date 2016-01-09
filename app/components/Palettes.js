@@ -15,12 +15,16 @@ const styles = StyleSheet.create({
     }
 });
 
-type Props = {
-    navigator: Object
+type Palette = {
+    name: string;
 }
 
-type Palette = {
-    name: string
+type Props = {
+    navigator: Object;
+    palettes: Array<Palette>;
+    add: Function;
+    edit: Function;
+    remove: Function;
 }
 
 export default class Palettes extends React.Component {
@@ -32,6 +36,12 @@ export default class Palettes extends React.Component {
         this.state = {
             dataSource: ds.cloneWithRows(this.props.palettes)
         };
+    }
+
+    componentWillReceiveProps(nextProps: Props) {
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(nextProps.palettes)
+        });
     }
 
     _handlePress = (palette: Palette) => {
@@ -48,6 +58,7 @@ export default class Palettes extends React.Component {
             <PaletteCard
                 key={palette.name}
                 palette={palette}
+                remove={() => this.props.remove(palette)}
                 onPress={() => this._handlePress(palette)}
             />
         );

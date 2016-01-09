@@ -32,17 +32,19 @@ const styles = StyleSheet.create({
 });
 
 type Color = {
-    color: string,
-    name: string
+    color: string;
+    name: string;
 }
 
 type Palette = {
-    colors: Array<Color>,
-    name: string
+    colors: Array<Color>;
+    name: string;
 }
 
 type Props = {
-    palette: Palette
+    palette: Palette;
+    edit: Function;
+    remove: Function;
 }
 
 const PaletteCard = (props: Props) => (
@@ -57,8 +59,8 @@ const PaletteCard = (props: Props) => (
                 <View style={styles.bottom}>
                     <Text style={styles.label}>{props.palette.name}</Text>
                     <CardAction name='share' />
-                    <CardAction name='create' />
-                    <CardAction name='delete' />
+                    <CardAction name='create' onPress={props.edit} />
+                    <CardAction name='delete' onPress={props.remove} />
                 </View>
             </View>
         </TouchableHighlight>
