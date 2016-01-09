@@ -1,20 +1,22 @@
-import React from "react-native";
-import Constants from "../constants.json";
+import React from 'react-native';
+import Constants from '../Constants.json';
 
 const {
     StyleSheet,
+    PixelRatio,
     View
 } = React;
 
 const styles = StyleSheet.create({
     outer: {
         marginVertical: Constants.spacing / 2,
-        marginHorizontal: Constants.spacing
+        borderColor: 'rgba(0, 0, 0, .08)',
+        borderTopWidth: 1 / PixelRatio.get(),
+        borderBottomWidth: 1 / PixelRatio.get()
     },
     inner: {
         backgroundColor: Constants.colorWhite,
-        borderRadius: 2,
-        overflow: "hidden"
+        overflow: 'hidden'
     }
 });
 

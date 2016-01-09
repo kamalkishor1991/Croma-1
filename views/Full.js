@@ -1,6 +1,6 @@
-import React from "react-native";
-import Color from "pigment/full";
-import Constants from "../constants.json";
+import React from 'react-native';
+import Color from 'pigment/full';
+import Constants from '../Constants.json';
 
 const {
     StyleSheet,
@@ -13,19 +13,19 @@ const {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center"
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     header: {
         fontSize: 36,
-        textAlign: "center",
+        textAlign: 'center',
         margin: Constants.spacing,
         opacity: 0.7
     },
     info: {
-        flexDirection: "row",
-        textAlign: "center",
+        flexDirection: 'row',
+        textAlign: 'center',
         borderRadius: 2,
         margin: Constants.spacing
     },
@@ -42,14 +42,14 @@ export default class Full extends React.Component {
 
     getItems(c) {
         return [
-            { key: "RGB", value: c.torgb() },
-            { key: "HSL", value: c.tohsl() },
-            { key: "HSV", value: c.tohsv() },
-            { key: "HWB", value: c.tohwb() },
-            { key: "CMYK", value: c.tocmyk() },
-            { key: "LAB", value: `lab(${c.lab[0].toFixed(2)}, ${c.lab[1].toFixed(2)}, ${c.lab[2].toFixed(2)})` },
-            { key: "Luminance", value: (c.luminance() * 100).toFixed(2) + "%" },
-            { key: "Darkness", value: (c.darkness() * 100).toFixed(2) + "%" }
+            { key: 'RGB', value: c.torgb() },
+            { key: 'HSL', value: c.tohsl() },
+            { key: 'HSV', value: c.tohsv() },
+            { key: 'HWB', value: c.tohwb() },
+            { key: 'CMYK', value: c.tocmyk() },
+            { key: 'LAB', value: `lab(${c.lab[0].toFixed(2)}, ${c.lab[1].toFixed(2)}, ${c.lab[2].toFixed(2)})` },
+            { key: 'Luminance', value: (c.luminance() * 100).toFixed(2) + '%' },
+            { key: 'Darkness', value: (c.darkness() * 100).toFixed(2) + '%' }
         ];
     }
 
@@ -75,7 +75,7 @@ export default class Full extends React.Component {
                 <Text style={[ styles.header, { color } ]}>{hex.toUpperCase()}</Text>
 
                 {this.getItems(c).map(item =>
-                    <TouchableHighlight underlayColor={"rgba(0, 0, 0, .1)"} onPress={() => this.copyToClipboard(item.value)}>
+                    <TouchableHighlight underlayColor={'rgba(0, 0, 0, .1)'} onPress={() => this.copyToClipboard(item.value)}>
                         <View style={styles.info}>
                             <Text style={[ styles.key, { color } ]}>{item.key} </Text>
                             <Text style={{ color }}>{item.value}</Text>
@@ -83,7 +83,7 @@ export default class Full extends React.Component {
                     </TouchableHighlight>
                 )}
 
-                <Text style={[ styles.hint, { color } ]}>{this.state.copied ? "Copied to clipboard!" : "Tap an item to copy"}</Text>
+                <Text style={[ styles.hint, { color } ]}>{this.state.copied ? 'Copied to clipboard!' : 'Tap an item to copy'}</Text>
             </View>
         );
     }

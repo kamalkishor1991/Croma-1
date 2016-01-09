@@ -1,6 +1,6 @@
-import React from "react-native";
-import Constants from "./constants.json";
-import Home from "./views/home";
+import React from 'react-native';
+import Constants from './Constants.json';
+import Home from './views/Home';
 
 const {
     AppRegistry,
@@ -23,14 +23,14 @@ export default class Croma extends React.Component {
             <NavigatorIOS
                 style={styles.nav}
                 initialRoute={{
-                    title: "Palettes",
+                    title: 'Palettes',
                     component: Home,
-                    rightButtonTitle: "Add",
+                    rightButtonTitle: 'Add',
                     onRightButtonPress: () => {
                         AlertIOS.alert(
-                            "Whatcha doin?",
-                            "You can't add a palette yet, silly",
-                            [ { text: "Okay" } ]
+                            'Whatcha doin?',
+                            'You can\'t add a palette yet, silly',
+                            [ { text: 'Okay' } ]
                         );
                     }
                 }}
@@ -42,4 +42,4 @@ export default class Croma extends React.Component {
     }
 }
 
-AppRegistry.registerComponent("Croma", () => Croma);
+AppRegistry.registerComponent('Croma', () => Croma);

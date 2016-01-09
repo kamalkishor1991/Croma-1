@@ -1,7 +1,7 @@
-import React from "react-native";
-import Card from "./card";
-import CardAction from "./card-action";
-import Constants from "../constants.json";
+import React from 'react-native';
+import Card from './Card';
+import CardAction from './CardAction';
+import Constants from '../Constants.json';
 
 const {
     StyleSheet,
@@ -13,8 +13,8 @@ const {
 const styles = StyleSheet.create({
     color: { height: 100 },
     bottom: {
-        flexDirection: "row",
-        alignItems: "center"
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     label: {
         flex: 1,
@@ -31,7 +31,7 @@ export default class ColorCard extends React.Component {
                 </TouchableHighlight>
                 <View style={styles.bottom}>
                     <Text style={styles.label}>{this.props.color.color}</Text>
-                    <CardAction name="delete" />
+                    <CardAction name='delete' />
                 </View>
             </Card>
         );

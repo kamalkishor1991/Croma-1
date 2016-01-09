@@ -1,10 +1,18 @@
-import React from "react-native";
-import ColorCard from "./color-card";
-import Details from "./full";
+import React from 'react-native';
+import ColorCard from './ColorCard';
+import Details from './Full';
+import Constants from '../Constants.json';
 
 const {
-    ListView
+    ListView,
+    StyleSheet
 } = React;
+
+const styles = StyleSheet.create({
+    container: {
+        marginVertical: Constants.spacing / 2
+    }
+});
 
 export default class Colors extends React.Component {
     constructor(props) {
@@ -40,6 +48,7 @@ export default class Colors extends React.Component {
             <ListView
                 {...this.props}
                 dataSource={this.state.dataSource}
+                contentContainerStyle={styles.container}
                 renderRow={this.renderRow.bind(this)}
             />
         );

@@ -1,13 +1,12 @@
-import React from "react-native";
-import Constants from "./constants.json";
-import Home from "./views/home";
-import Icon from "./views/icon";
+import React from 'react-native';
+import Constants from './Constants.json';
+import Home from './views/Home';
+import Icon from './views/Icon';
 
 const {
     AppRegistry,
     Navigator,
     Text,
-    Image,
     TouchableOpacity,
     StyleSheet
 } = React;
@@ -18,15 +17,15 @@ const styles = StyleSheet.create({
     },
     title: {
         color: Constants.colorWhite,
-        fontWeight: "bold",
+        fontWeight: 'bold',
         fontSize: 18,
         marginVertical: 14,
         paddingHorizontal: 4
     },
     icon: {
-        height: 24,
-        width: 24,
-        margin: 16
+        fontSize: 24,
+        margin: 16,
+        color: '#fff'
     },
     scene: {
         flex: 1,
@@ -43,7 +42,7 @@ const NavigationBarRouteMapper = {
 
         return (
             <TouchableOpacity onPress={() => navigator.pop()}>
-                <Icon name="back" color="white" style={styles.icon} />
+                <Icon name='arrow-back' style={styles.icon} />
             </TouchableOpacity>
         );
     },
@@ -77,9 +76,9 @@ export default class Croma extends React.Component {
             <Navigator
                 style={styles.nav}
                 initialRoute={{
-                    title: "Palettes",
+                    title: 'Palettes',
                     component: Home,
-                    rightButtonTitle: "Add",
+                    rightButtonTitle: 'Add',
                     index: 0,
                     onRightButtonPress: () => {
                     }
@@ -102,4 +101,4 @@ export default class Croma extends React.Component {
     }
 }
 
-AppRegistry.registerComponent("Croma", () => Croma);
+AppRegistry.registerComponent('Croma', () => Croma);
