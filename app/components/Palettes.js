@@ -2,9 +2,8 @@
 
 import React from 'react-native';
 import PaletteCard from './PaletteCard';
-import Colors from './Colors';
-import store from '../store/store';
-import Constants from '../Constants';
+import ColorsList from './ColorsList';
+import Colors from '../constants/Colors';
 
 const {
     ListView,
@@ -13,7 +12,7 @@ const {
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: Constants.spacing / 2
+        marginVertical: 4
     }
 });
 
@@ -25,21 +24,21 @@ type Palette = {
     name: string
 }
 
-export default class Home extends React.Component {
+export default class Palettes extends React.Component {
     constructor(props: Props) {
         super(props);
 
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
         this.state = {
-            dataSource: ds.cloneWithRows(store.getAll())
+            dataSource: ds.cloneWithRows(this.props.palettes)
         };
     }
 
     _handlePress = (palette: Palette) => {
         this.props.navigator.push({
             title: palette.name,
-            component: Colors,
+            component: ColorsList,
             rightButtonTitle: 'Add',
             passProps: { palette }
         });

@@ -2,7 +2,7 @@
 
 import React from 'react-native';
 import Color from 'pigment/full';
-import Constants from '../Constants';
+import Colors from '../constants/Colors';
 
 const {
     StyleSheet,
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 36,
         textAlign: 'center',
-        margin: Constants.spacing,
+        margin: 8,
         opacity: 0.7
     },
     infoContainer: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     info: {
         flexDirection: 'row',
         borderRadius: 2,
-        margin: Constants.spacing
+        margin: 8
     },
     key: {
         fontSize: 16,
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     hint: {
         fontSize: 12,
-        marginTop: Constants.spacing * 2
+        marginTop: 16
     }
 });
 
@@ -79,7 +79,7 @@ type Props = {
 const Full = (props: Props) => {
     const c = new Color(props.color.color);
     const hex = c.tohex();
-    const color = c.darkness() > 0.4 ? Constants.colorWhite : Constants.colorBlack;
+    const color = c.darkness() > 0.4 ? Colors.white : Colors.black;
 
     return (
         <View style={[ styles.container, { backgroundColor: hex } ]}>

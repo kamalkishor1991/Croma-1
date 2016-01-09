@@ -3,7 +3,7 @@
 import React from 'react-native';
 import Card from './Card';
 import CardAction from './CardAction';
-import Constants from '../Constants';
+import Colors from '../constants/Colors';
 
 const {
     StyleSheet,
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     },
     label: {
         flex: 1,
-        marginHorizontal: Constants.spacing * 2
+        marginHorizontal: 16
     }
 });
 
@@ -47,7 +47,7 @@ type Props = {
 
 const PaletteCard = (props: Props) => (
     <Card>
-        <TouchableHighlight {...props} underlayColor={Constants.colorWhite}>
+        <TouchableHighlight {...props} underlayColor={Colors.white}>
             <View>
                 <View style={styles.palette}>
                     {props.palette.colors.map(item => (

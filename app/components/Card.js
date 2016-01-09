@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react-native';
-import Constants from '../Constants';
+import Colors from '../constants/Colors';
 
 const {
     StyleSheet,
@@ -11,13 +11,13 @@ const {
 
 const styles = StyleSheet.create({
     outer: {
-        marginVertical: Constants.spacing / 2,
+        marginVertical: 4,
         borderColor: 'rgba(0, 0, 0, .08)',
         borderTopWidth: 1 / PixelRatio.get(),
         borderBottomWidth: 1 / PixelRatio.get()
     },
     inner: {
-        backgroundColor: Constants.colorWhite,
+        backgroundColor: Colors.white,
         overflow: 'hidden'
     }
 });
@@ -34,10 +34,5 @@ const Card = (props: Props) => (
         </View>
     </View>
 );
-
-Card.propTypes = {
-    children: React.PropTypes.any,
-    style: View.propTypes.style
-};
 
 export default Card;

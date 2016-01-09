@@ -3,7 +3,6 @@
 import React from 'react-native';
 import ColorCard from './ColorCard';
 import Details from './Full';
-import Constants from '../Constants';
 
 const {
     ListView,
@@ -12,7 +11,7 @@ const {
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: Constants.spacing / 2
+        marginVertical: 4
     }
 });
 
@@ -29,7 +28,7 @@ type Props = {
     palette: Palette
 }
 
-export default class Colors extends React.Component {
+export default class ColorsList extends React.Component {
     constructor(props: Props) {
         super(props);
 
