@@ -1,71 +1,26 @@
 import React from 'react-native';
+import MenuButton from './components/MenuButton';
 import configureStore from './store/configureStore';
 import RootContainer from './containers/RootContainer';
-import Icon from './components/Icon';
+import renderScene from './navigation/renderScene';
+import renderNavigationBar from './navigation/renderNavigationBar';
 import Colors from './constants/Colors';
 import data from './data.json';
 
 const {
     Navigator,
-    Text,
-    TouchableOpacity,
     StyleSheet
 } = React;
 
 const styles = StyleSheet.create({
-    navbar: {
-        backgroundColor: Colors.primary
-    },
-    title: {
-        color: Colors.white,
-        fontWeight: 'bold',
-        fontSize: 18,
-        marginVertical: 14,
-        paddingHorizontal: 4
-    },
-    icon: {
-        fontSize: 24,
-        margin: 16,
-        color: Colors.white
+    container: {
+        flex: 1
     },
     scene: {
-        flex: 1,
-        marginTop: 56,
-        backgroundColor: Colors.lightGray
+        marginTop: 56, // offset for appbar height
+        backgroundColor: Colors.lightGrey
     }
 });
-
-const NavigationBarRouteMapper = {
-    LeftButton(route, navigator) {
-        if (route.index === 0) {
-            return null;
-        }
-
-        return (
-            <TouchableOpacity onPress={() => navigator.pop()}>
-                <Icon name='arrow-back' style={styles.icon} />
-            </TouchableOpacity>
-        );
-    },
-
-    RightButton(route) {
-        if (route.rightButtonIcon) {
-            return (
-                <TouchableOpacity onPress={route.onRightButtonPress}>
-                    <route.rightButtonIcon style={styles.icon} />
-                </TouchableOpacity>
-            );
-        }
-    },
-
-    Title(route) {
-        return (
-            <Text style={styles.title}>
-                {route.title}
-            </Text>
-        );
-    }
-};
 
 const palettes = [];
 
@@ -90,28 +45,20 @@ const store = configureStore({
 
 const App = () => (
     <Navigator
-        style={styles.nav}
         initialRoute={{
             title: 'Palettes',
+            leftComponent: MenuButton,
             component: RootContainer,
             passProps: {
                 store
             },
             index: 0,
         }}
-        renderScene={(route, navigator) =>
-            <route.component
-                {...route.passProps}
-                navigator={navigator}
-                style={styles.scene}
-            />
-        }
-        navigationBar={
-            <Navigator.NavigationBar
-                routeMapper={NavigationBarRouteMapper}
-                style={styles.navbar}
-            />
-        }
+        renderScene={renderScene}
+        navigationBar={renderNavigationBar()}
+        configureScene={() => Navigator.SceneConfigs.FloatFromBottomAndroid}
+        sceneStyle={styles.scene}
+        style={styles.container}
     />
 );
 

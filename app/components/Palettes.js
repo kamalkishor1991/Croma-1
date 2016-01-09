@@ -3,7 +3,6 @@
 import React from 'react-native';
 import PaletteCard from './PaletteCard';
 import ColorsList from './ColorsList';
-import Colors from '../constants/Colors';
 
 const {
     ListView,
@@ -12,7 +11,7 @@ const {
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 4
+        paddingVertical: 4
     }
 });
 

@@ -13,12 +13,13 @@ type Store = {
 }
 
 type Props = {
-    store: Store
+    store: Store,
+    navigator: Object
 }
 
 const RootContainer = (props: Props) => (
     <Provider store={props.store}>
-        <PalettesContainer />
+        <PalettesContainer navigator={props.navigator} />
     </Provider>
 );
 

@@ -27,15 +27,16 @@ const styles = StyleSheet.create({
         opacity: 0.7
     },
     infoContainer: {
-        borderRadius: 2
+        borderRadius: 24
     },
     info: {
         flexDirection: 'row',
-        borderRadius: 2,
-        margin: 8
+        alignItems: 'center',
+        marginVertical: 8,
+        marginHorizontal: 16
     },
     key: {
-        fontSize: 16,
+        fontSize: 14,
         opacity: 0.5
     },
     value: {
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
     },
     hint: {
         fontSize: 12,
-        marginTop: 16
+        marginTop: 16,
+        opacity: 0.5
     }
 });
 
@@ -76,7 +78,7 @@ type Props = {
     color: ColorType
 }
 
-const Full = (props: Props) => {
+const ColorSheet = (props: Props) => {
     const c = new Color(props.color.color);
     const hex = c.tohex();
     const color = c.darkness() > 0.4 ? Colors.white : Colors.black;
@@ -106,4 +108,4 @@ const Full = (props: Props) => {
     );
 };
 
-export default Full;
+export default ColorSheet;

@@ -7,14 +7,25 @@ import Palettes from '../components/Palettes';
 import * as PalettesActions from '../actions/PalettesActions';
 
 type Props = {
+    navigator: Object;
     palettes: Object;
     dispatch: Function;
 }
 
 const PalettesContainer = (props: Props) => {
-    const { palettes, dispatch } = props;
+    const {
+        navigator,
+        palettes,
+        dispatch
+    } = props;
 
-    return <Palettes palettes={palettes} {...bindActionCreators(PalettesActions, dispatch)} />;
+    return (
+        <Palettes
+            navigator={navigator}
+            palettes={palettes}
+            {...bindActionCreators(PalettesActions, dispatch)}
+        />
+    );
 };
 
 function select(state) {

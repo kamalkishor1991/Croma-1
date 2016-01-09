@@ -2,10 +2,11 @@
 
 import React from 'react-native';
 import Icon from './Icon';
+import TouchFeedback from './TouchFeedback';
 
 const {
     StyleSheet,
-    TouchableHighlight
+    View,
 } = React;
 
 const styles = StyleSheet.create({
@@ -25,9 +26,15 @@ type Props = {
 }
 
 const CardAction = (props: Props) => (
-    <TouchableHighlight {...props} underlayColor={'rgba(0, 0, 0, .1)'}>
-        <Icon name={props.name} style={styles.icon} />
-    </TouchableHighlight>
+    <TouchFeedback
+        {...props}
+        pressColor='rgba(0, 0, 0, .16)'
+        borderless
+    >
+        <View>
+            <Icon name={props.name} style={styles.icon} />
+        </View>
+    </TouchFeedback>
 );
 
 export default CardAction;

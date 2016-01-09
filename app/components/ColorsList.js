@@ -2,7 +2,7 @@
 
 import React from 'react-native';
 import ColorCard from './ColorCard';
-import Details from './Full';
+import ColorSheet from './ColorSheet';
 
 const {
     ListView,
@@ -11,7 +11,7 @@ const {
 
 const styles = StyleSheet.create({
     container: {
-        marginVertical: 4
+        paddingVertical: 4
     }
 });
 
@@ -41,8 +41,8 @@ export default class ColorsList extends React.Component {
 
     _handlePress = (color: Color) => {
         this.props.navigator.push({
-            title: color.color,
-            component: Details,
+            title: color.color.toUpperCase(),
+            component: ColorSheet,
             passProps: { color }
         });
     };

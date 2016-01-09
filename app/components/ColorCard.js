@@ -38,7 +38,7 @@ const ColorCard = (props: Props) => (
             <View style={[ styles.color, { backgroundColor: props.color.color } ]} />
         </TouchableHighlight>
         <View style={styles.bottom}>
-            <Text style={styles.label}>{props.color.color}</Text>
+            <Text style={styles.label}>{props.color.color.toUpperCase()}</Text>
             <CardAction name='delete' />
         </View>
     </Card>
