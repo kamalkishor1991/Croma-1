@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "pigment": "0.0.5",
-    "react-native": "^0.18.0-rc"
+    "react-native": "^0.18.0-rc",
+    "react-native-vector-icons": "^1.0.4"
   }
 }
