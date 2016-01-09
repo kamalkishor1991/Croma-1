@@ -1,13 +1,16 @@
+/* @flow */
+
 import React from 'react-native';
 import Color from 'pigment/full';
-import Constants from '../Constants.json';
+import Constants from '../Constants';
 
 const {
     StyleSheet,
     Text,
     View,
     TouchableHighlight,
-    Clipboard
+    Clipboard,
+    ToastAndroid
 } = React;
 
 const styles = StyleSheet.create({
@@ -23,72 +26,84 @@ const styles = StyleSheet.create({
         margin: Constants.spacing,
         opacity: 0.7
     },
+    infoContainer: {
+        borderRadius: 2
+    },
     info: {
         flexDirection: 'row',
-        textAlign: 'center',
         borderRadius: 2,
         margin: Constants.spacing
     },
-    key: { opacity: 0.5 },
-    hint: { margin: Constants.spacing * 2 }
+    key: {
+        fontSize: 16,
+        opacity: 0.5
+    },
+    value: {
+        fontSize: 16
+    },
+    hint: {
+        fontSize: 12,
+        marginTop: Constants.spacing * 2
+    }
 });
 
-export default class Full extends React.Component {
-    constructor(props) {
-        super(props);
+const _getItems = (c) => {
+    return [
+        { key: 'RGB', value: c.torgb() },
+        { key: 'HSL', value: c.tohsl() },
+        { key: 'HSV', value: c.tohsv() },
+        { key: 'HWB', value: c.tohwb() },
+        { key: 'CMYK', value: c.tocmyk() },
+        { key: 'LAB', value: `lab(${c.lab[0].toFixed(2)}, ${c.lab[1].toFixed(2)}, ${c.lab[2].toFixed(2)})` },
+        { key: 'Luminance', value: (c.luminance() * 100).toFixed(2) + '%' },
+        { key: 'Darkness', value: (c.darkness() * 100).toFixed(2) + '%' }
+    ];
+};
 
-        this.state = { copied: null };
-    }
+const _copyToClipboard = (text) => {
+    Clipboard.setString(text);
 
-    getItems(c) {
-        return [
-            { key: 'RGB', value: c.torgb() },
-            { key: 'HSL', value: c.tohsl() },
-            { key: 'HSV', value: c.tohsv() },
-            { key: 'HWB', value: c.tohwb() },
-            { key: 'CMYK', value: c.tocmyk() },
-            { key: 'LAB', value: `lab(${c.lab[0].toFixed(2)}, ${c.lab[1].toFixed(2)}, ${c.lab[2].toFixed(2)})` },
-            { key: 'Luminance', value: (c.luminance() * 100).toFixed(2) + '%' },
-            { key: 'Darkness', value: (c.darkness() * 100).toFixed(2) + '%' }
-        ];
-    }
+    ToastAndroid.show(`Copied to Clipboard: ${text}`, ToastAndroid.SHORT);
+};
 
-    copyToClipboard(text) {
-        Clipboard.setString(text);
 
-        this.setState({ copied: true });
-
-        if (this.copyTimeout) {
-            clearTimeout(this.copyTimeout);
-        }
-
-        this.copyTimeout = setTimeout(() => this.setState({ copied: null }), 1500);
-    }
-
-    render() {
-        let c = new Color(this.props.color.color),
-            hex = c.tohex(),
-            color = c.darkness() > 0.4 ? Constants.colorWhite : Constants.colorBlack;
-
-        return (
-            <View style={[ styles.container, { backgroundColor: hex } ]}>
-                <Text style={[ styles.header, { color } ]}>{hex.toUpperCase()}</Text>
-
-                {this.getItems(c).map(item =>
-                    <TouchableHighlight underlayColor={'rgba(0, 0, 0, .1)'} onPress={() => this.copyToClipboard(item.value)}>
-                        <View style={styles.info}>
-                            <Text style={[ styles.key, { color } ]}>{item.key} </Text>
-                            <Text style={{ color }}>{item.value}</Text>
-                        </View>
-                    </TouchableHighlight>
-                )}
-
-                <Text style={[ styles.hint, { color } ]}>{this.state.copied ? 'Copied to clipboard!' : 'Tap an item to copy'}</Text>
-            </View>
-        );
-    }
+type ColorType = {
+    color: string,
+    name: string
 }
 
-Full.propTypes = {
-    color: React.PropTypes.object
+type Props = {
+    color: ColorType
+}
+
+const Full = (props: Props) => {
+    const c = new Color(props.color.color);
+    const hex = c.tohex();
+    const color = c.darkness() > 0.4 ? Constants.colorWhite : Constants.colorBlack;
+
+    return (
+        <View style={[ styles.container, { backgroundColor: hex } ]}>
+            <Text style={[ styles.header, { color } ]}>{hex.toUpperCase()}</Text>
+
+            {_getItems(c).map(item =>
+                <TouchableHighlight
+                    key={item.value}
+                    style={styles.infoContainer}
+                    underlayColor={'rgba(0, 0, 0, .1)'}
+                    onPress={() => _copyToClipboard(item.value)}
+                >
+                    <View style={styles.info}>
+                        <Text style={[ styles.key, { color } ]}>{item.key} </Text>
+                        <Text style={[ styles.value, { color } ]}>{item.value}</Text>
+                    </View>
+                </TouchableHighlight>
+            )}
+
+            <Text style={[ styles.hint, { color } ]}>
+                Tap an item to copy
+            </Text>
+        </View>
+    );
 };
+
+export default Full;

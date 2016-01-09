@@ -1,5 +1,5 @@
 import React from 'react-native';
-import Constants from './Constants.json';
+import Constants from './Constants';
 import Home from './views/Home';
 
 const {

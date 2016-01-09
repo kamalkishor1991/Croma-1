@@ -1,7 +1,9 @@
+/* @flow */
+
 import React from 'react-native';
 import ColorCard from './ColorCard';
 import Details from './Full';
-import Constants from '../Constants.json';
+import Constants from '../Constants';
 
 const {
     ListView,
@@ -14,34 +16,47 @@ const styles = StyleSheet.create({
     }
 });
 
+type Color = {
+    color: string,
+    name: string
+}
+
+type Palette = {
+    colors: Array<Color>
+}
+
+type Props = {
+    palette: Palette
+}
+
 export default class Colors extends React.Component {
-    constructor(props) {
+    constructor(props: Props) {
         super(props);
 
-        let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
         this.state = {
             dataSource: ds.cloneWithRows(this.props.palette.colors)
         };
     }
 
-    onPress(color) {
+    _handlePress = (color: Color) => {
         this.props.navigator.push({
             title: color.color,
             component: Details,
             passProps: { color }
         });
-    }
+    };
 
-    renderRow(color) {
+    _renderRow = (color: Color) => {
         return (
             <ColorCard
                 color={color}
                 key={color.name}
-                onPress={() => this.onPress(color)}
+                onPress={() => this._handlePress(color)}
             />
         );
-    }
+    };
 
     render() {
         return (
@@ -49,12 +64,8 @@ export default class Colors extends React.Component {
                 {...this.props}
                 dataSource={this.state.dataSource}
                 contentContainerStyle={styles.container}
-                renderRow={this.renderRow.bind(this)}
+                renderRow={this._renderRow}
             />
         );
     }
 }
-
-Colors.propTypes = {
-    palette: React.PropTypes.object
-};

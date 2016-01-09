@@ -1,7 +1,9 @@
+/* @flow */
+
 import React from 'react-native';
 import Card from './Card';
 import CardAction from './CardAction';
-import Constants from '../Constants.json';
+import Constants from '../Constants';
 
 const {
     StyleSheet,
@@ -22,22 +24,24 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class ColorCard extends React.Component {
-    render() {
-        return (
-            <Card>
-                <TouchableHighlight {...this.props} underlayColor={Constants.colorWhite}>
-                    <View style={[ styles.color, { backgroundColor: this.props.color.color } ]} />
-                </TouchableHighlight>
-                <View style={styles.bottom}>
-                    <Text style={styles.label}>{this.props.color.color}</Text>
-                    <CardAction name='delete' />
-                </View>
-            </Card>
-        );
-    }
+type Color = {
+    color: string
 }
 
-ColorCard.propTypes = {
-    color: React.PropTypes.object
-};
+type Props = {
+    color: Color
+}
+
+const ColorCard = (props: Props) => (
+    <Card>
+        <TouchableHighlight {...props} underlayColor={Constants.colorWhite}>
+            <View style={[ styles.color, { backgroundColor: props.color.color } ]} />
+        </TouchableHighlight>
+        <View style={styles.bottom}>
+            <Text style={styles.label}>{props.color.color}</Text>
+            <CardAction name='delete' />
+        </View>
+    </Card>
+);
+
+export default ColorCard;

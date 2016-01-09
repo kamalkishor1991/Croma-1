@@ -1,7 +1,9 @@
+/* @flow */
+
 import React from 'react-native';
 import Card from './Card';
 import CardAction from './CardAction';
-import Constants from '../Constants.json';
+import Constants from '../Constants';
 
 const {
     StyleSheet,
@@ -16,7 +18,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         height: 100
     },
-    color: { flex: 1 },
+    color: {
+        flex: 1
+    },
     bottom: {
         flexDirection: 'row',
         alignItems: 'center'
@@ -27,33 +31,37 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class PaletteCard extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <Card>
-                <TouchableHighlight {...this.props} underlayColor={Constants.colorWhite}>
-                    <View>
-                        <View style={styles.palette}>
-                            {this.props.palette.colors.map(item => (
-                                <View style={[ styles.color, { backgroundColor: item.color } ]} key={item.color} />
-                            ))}
-                        </View>
-                        <View style={styles.bottom}>
-                            <Text style={styles.label}>{this.props.palette.name}</Text>
-                            <CardAction name='create' />
-                            <CardAction name='delete' />
-                        </View>
-                    </View>
-                </TouchableHighlight>
-            </Card>
-        );
-    }
+type Color = {
+    color: string,
+    name: string
 }
 
-PaletteCard.propTypes = {
-    palette: React.PropTypes.object
-};
+type Palette = {
+    colors: Array<Color>,
+    name: string
+}
+
+type Props = {
+    palette: Palette
+}
+
+const PaletteCard = (props: Props) => (
+    <Card>
+        <TouchableHighlight {...props} underlayColor={Constants.colorWhite}>
+            <View>
+                <View style={styles.palette}>
+                    {props.palette.colors.map(item => (
+                        <View style={[ styles.color, { backgroundColor: item.color } ]} key={item.color} />
+                    ))}
+                </View>
+                <View style={styles.bottom}>
+                    <Text style={styles.label}>{props.palette.name}</Text>
+                    <CardAction name='create' />
+                    <CardAction name='delete' />
+                </View>
+            </View>
+        </TouchableHighlight>
+    </Card>
+);
+
+export default PaletteCard;

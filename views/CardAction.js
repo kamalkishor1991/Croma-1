@@ -1,3 +1,5 @@
+/* @flow */
+
 import React from 'react-native';
 import Icon from './Icon';
 
@@ -18,16 +20,14 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class CardAction extends React.Component {
-    render() {
-        return (
-            <TouchableHighlight {...this.props} underlayColor={'rgba(0, 0, 0, .1)'}>
-                <Icon name={this.props.name} style={styles.icon} />
-            </TouchableHighlight>
-        );
-    }
+type Props = {
+    name: string
 }
 
-CardAction.propTypes = {
-    palette: React.PropTypes.object
-};
+const CardAction = (props: Props) => (
+    <TouchableHighlight {...props} underlayColor={'rgba(0, 0, 0, .1)'}>
+        <Icon name={props.name} style={styles.icon} />
+    </TouchableHighlight>
+);
+
+export default CardAction;

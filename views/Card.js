@@ -1,5 +1,7 @@
+/* @flow */
+
 import React from 'react-native';
-import Constants from '../Constants.json';
+import Constants from '../Constants';
 
 const {
     StyleSheet,
@@ -20,18 +22,22 @@ const styles = StyleSheet.create({
     }
 });
 
-export default class Card extends React.Component {
-    render() {
-        return (
-            <View style={styles.outer}>
-                <View {...this.props} style={[ styles.inner, this.props.style ]}>
-                    {this.props.children}
-                </View>
-            </View>
-        );
-    }
+type Props = {
+    children: ReactElement,
+    style?: any
 }
 
+const Card = (props: Props) => (
+    <View style={styles.outer}>
+        <View {...props} style={[ styles.inner, props.style ]}>
+            {props.children}
+        </View>
+    </View>
+);
+
 Card.propTypes = {
-    children: React.PropTypes.any
+    children: React.PropTypes.any,
+    style: View.propTypes.style
 };
+
+export default Card;
