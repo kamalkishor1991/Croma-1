@@ -6,9 +6,14 @@ import thunk from 'redux-thunk';
 import devTools from 'remote-redux-devtools';
 import rootReducer from '../reducers';
 
+const middlewares = [ applyMiddleware(thunk) ];
+
+if (typeof global.self === 'undefined') {
+    middlewares.push(devTools());
+}
+
 const finalCreateStore = compose(
-    applyMiddleware(thunk),
-    devTools()
+    ...middlewares
 )(createStore);
 
 export default function configureStore(initialState: ?any): Object {
