@@ -1,47 +1,23 @@
 import React from 'react-native';
-import MenuButton from './components/MenuButton';
 import configureStore from './store/configureStore';
-import RootContainer from './containers/RootContainer';
-import renderScene from './navigation/renderScene';
-import renderNavigationBar from './navigation/renderNavigationBar';
-import Colors from './constants/Colors';
+import PersistentNavigator from './navigation/PersistentNavigator';
 import palettes from './data.json';
 
 const {
-    Navigator,
-    StyleSheet
+    NavigationState
 } = React;
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    scene: {
-        marginTop: 56, // offset for appbar height
-        backgroundColor: Colors.lightGrey
-    }
-});
 
 const store = configureStore({
     palettes
 });
 
+const PERSISTANCE_KEY = 'FLAT_PERSISTENCE_0';
+
 const App = () => (
-    <Navigator
-        initialRoute={{
-            title: 'Palettes',
-            leftComponent: MenuButton,
-            component: RootContainer,
-            passProps: {
-                store
-            },
-            index: 0,
-        }}
-        renderScene={renderScene}
-        navigationBar={renderNavigationBar()}
-        configureScene={() => Navigator.SceneConfigs.FloatFromBottomAndroid}
-        sceneStyle={styles.scene}
-        style={styles.container}
+    <PersistentNavigator
+        initialState={new NavigationState([ { name: 'palettes' } ], 0)}
+        persistenceKey={PERSISTANCE_KEY}
+        store={store}
     />
 );
 

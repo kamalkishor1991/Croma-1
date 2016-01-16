@@ -1,5 +1,6 @@
 /* @flow */
 
+import './app/navigation/NavigationRFC/polyfill';
 import React from 'react-native';
 import App from './app/App';
 

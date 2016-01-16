@@ -2,11 +2,11 @@
 
 import React from 'react-native';
 import PaletteCard from './PaletteCard';
-import ColorsList from './ColorsList';
 
 const {
     ListView,
-    StyleSheet
+    StyleSheet,
+    NavigationActions,
 } = React;
 
 const styles = StyleSheet.create({
@@ -45,12 +45,12 @@ export default class Palettes extends React.Component {
     }
 
     _handlePress = (palette: Palette) => {
-        this.props.navigator.push({
-            title: palette.name,
-            component: ColorsList,
-            rightButtonTitle: 'Add',
-            passProps: { palette }
-        });
+        this.props.onNavigation(new NavigationActions.Push({
+            name: 'colors',
+            props: {
+                palette
+            }
+        }));
     };
 
     _renderRow = (palette: Palette) => {

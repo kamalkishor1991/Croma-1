@@ -2,10 +2,10 @@
 
 import React from 'react-native';
 import ColorCard from './ColorCard';
-import ColorSheet from './ColorSheet';
 
 const {
     ListView,
+    NavigationActions,
     StyleSheet
 } = React;
 
@@ -40,11 +40,12 @@ export default class ColorsList extends React.Component {
     }
 
     _handlePress = (color: Color) => {
-        this.props.navigator.push({
-            title: color.color.toUpperCase(),
-            component: ColorSheet,
-            passProps: { color }
-        });
+        this.props.onNavigation(new NavigationActions.Push({
+            name: 'details',
+            props: {
+                color
+            }
+        }));
     };
 
     _renderRow = (color: Color) => {
