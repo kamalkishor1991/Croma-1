@@ -7,8 +7,6 @@ import Colors from '../constants/Colors';
 import routeMapper from './routeMapper';
 
 const {
-    View,
-    Text,
     StyleSheet,
     Platform,
     NavigationHeader,
