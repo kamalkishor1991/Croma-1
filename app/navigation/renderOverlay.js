@@ -37,7 +37,7 @@ const _renderTitleComponent = (route, index, onNavigation) => {
     const TitleComponent = routeDesc.titleComponent;
 
     if (TitleComponent) {
-        return <TitleComponent {...routeDesc.passProps} onNavigation={onNavigation} />;
+        return <TitleComponent {...route.props} onNavigation={onNavigation} />;
     }
 
     if (routeDesc.title) {
@@ -52,7 +52,7 @@ const _renderLeftComponent = (route, index, onNavigation) => {
     const LeftComponent = routeDesc.leftComponent;
 
     if (LeftComponent) {
-        return <LeftComponent {...routeDesc.passProps} onNavigation={onNavigation} />;
+        return <LeftComponent {...route.props} onNavigation={onNavigation} />;
     }
 
     if (index !== 0) {
@@ -65,7 +65,7 @@ const _renderRightComponent = (route, index, onNavigation) => {
     const RightComponent = routeDesc.rightComponent;
 
     if (RightComponent) {
-        return <RightComponent {...routeDesc.passProps} onNavigation={onNavigation} />;
+        return <RightComponent {...route.props} onNavigation={onNavigation} />;
     }
 };
 

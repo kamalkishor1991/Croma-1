@@ -12,14 +12,12 @@ export default function(route) {
     case 'colors':
         return {
             component: ColorsList,
-            title: route.props.palette.name,
-            passProps: route.props
+            title: route.props.palette.name
         };
     case 'details':
         return {
             component: ColorSheet,
-            title: route.props.color.color.toUpperCase(),
-            passProps: route.props
+            title: route.props.color.color.toUpperCase()
         };
     }
 }
