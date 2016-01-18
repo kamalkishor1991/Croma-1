@@ -26,14 +26,13 @@ const renderScene = function(navState: Object, onNavigation: Function, store: Ob
 
         const {
             component: RouteComponent,
-            passProps
         } = routeMapper(route);
 
         return (
             <NavigationCard {...props}>
                 <Provider store={store}>
                     <RouteComponent
-                        {...passProps}
+                        {...route.props}
                         style={styles.container}
                         onNavigation={onNavigation}
                     />
